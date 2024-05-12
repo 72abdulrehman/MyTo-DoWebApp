@@ -5,10 +5,12 @@ todos = functions.get_todos()
 
 
 def add_todo():
-    todo = st.session_state["new_todo"] + "\n"
-    todos.append(todo)
-    functions.write_todos(todos)
-
+    todo_local = st.session_state["new_todo"] + "\n"
+    if todo_local not in todos:
+        todos.append(todo_local)
+        functions.write_todos(todos)
+        st.session_state["new_todo"] = ""
+    
 st.title("My To-Do App")
 st.subheader("This is my to-do app.")
 st.write("This app allows to manage to-do items.")
